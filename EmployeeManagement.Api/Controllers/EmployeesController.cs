@@ -51,5 +51,25 @@ namespace EmployeeManagement.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retreiving data from the database");
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        {
+            try
+            {
+                if(employee == null)
+                {
+                    return BadRequest();
+                }
+
+                var created = await _employeeRepository.AddEmployee(employee);
+
+                return CreatedAtAction(nameof(GetEmployee), new { id = created.EmployeeId }, created);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retreiving data from the database");
+            }
+        }
     }
 }
