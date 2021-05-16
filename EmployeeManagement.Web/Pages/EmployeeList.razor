@@ -1,22 +1,24 @@
 ﻿@page "/"
 @inherits EmployeeListBase
 
-@if(this.Employees == null)
+@if (this.Employees == null)
 {
     <div class="spinner"></div>
 }
 else
 {
     <h3>Employee List</h3>
+    <h4>Selected Employees Count - @SelectedEmployeesCount</h4>
 
-    <input type="checkbox" id="showFooter" @bind="ShowFooter"/>
+    <input type="checkbox" id="showFooter" @bind="ShowFooter" />
     <label for="showFooter">Show Footer</label>
 
     <div class="card-deck">
-        @foreach(var employee in this.Employees)
+        @foreach (var employee in this.Employees)
         {
             <DisplayEmployee Employee="employee"
-                             ShowFooter="ShowFooter"/>
+                             ShowFooter="ShowFooter"
+                             OnEmployeeSelection="EmployeeSelectionChanged" />
         }
     </div>
 }

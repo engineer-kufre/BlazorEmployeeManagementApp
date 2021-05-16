@@ -17,6 +17,8 @@ namespace EmployeeManagement.Web.Pages
 
         public IEnumerable<Employee> Employees { get; set; }
 
+        protected int SelectedEmployeesCount { get; set; } = 0;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -24,6 +26,11 @@ namespace EmployeeManagement.Web.Pages
                 this.Employees = (await this.EmployeeService.GetEmployees()).ToList();
                 StateHasChanged();
             }
+        }
+
+        protected void EmployeeSelectionChanged(bool isSelected)
+        {
+            SelectedEmployeesCount = isSelected ? SelectedEmployeesCount + 1 : SelectedEmployeesCount - 1;
         }
     }
 }
