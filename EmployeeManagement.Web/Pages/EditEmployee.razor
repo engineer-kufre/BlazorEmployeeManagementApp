@@ -1,7 +1,7 @@
 ﻿@page "/editemployee/{id}"
 @inherits EditEmployeeBase
 
-<EditForm Model="@Employee">
+<EditForm Model="@EditEmployeeModel" OnValidSubmit="HandleValidSubmit">
     <h3>Edit Employee</h3>
     <hr />
     <div class="form-group row">
@@ -10,7 +10,7 @@
         </label>
         <div class="col-sm-10">
             <InputText id="firstName" class="form-control" placeholder="First Name"
-                       @bind-Value="Employee.FirstName" />
+                       @bind-Value="EditEmployeeModel.FirstName" />
         </div>
     </div>
     <div class="form-group row">
@@ -19,7 +19,7 @@
         </label>
         <div class="col-sm-10">
             <InputText id="lastName" class="form-control" placeholder="Last Name"
-                       @bind-Value="Employee.LastName" />
+                       @bind-Value="EditEmployeeModel.LastName" />
         </div>
     </div>
     <div class="form-group row">
@@ -28,7 +28,16 @@
         </label>
         <div class="col-sm-10">
             <InputText id="email" class="form-control" placeholder="Email"
-                       @bind-Value="Employee.Email" />
+                       @bind-Value="EditEmployeeModel.Email" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="confirmEmail" class="col-sm-2 col-form-label">
+            Confirm Email
+        </label>
+        <div class="col-sm-10">
+            <InputText id="confirmEmail" class="form-control" placeholder="Confirm Email"
+                       @bind-Value="EditEmployeeModel.ConfirmEmail" />
         </div>
     </div>
     <div class="form-group row">
@@ -53,7 +62,7 @@
         </label>
         <div class="col-sm-10">
             <InputSelect id="gender" class="form-control"
-                         @bind-Value="Employee.Gender">
+                         @bind-Value="EditEmployeeModel.Gender">
                 @foreach (var gender in Enum.GetValues(typeof(Gender)))
                 {
                     <option value="@gender">
@@ -63,4 +72,5 @@
             </InputSelect>
         </div>
     </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
 </EditForm>
